@@ -3,6 +3,7 @@ document.getElementById("header-nav").innerHTML=
 <nav class="navbar navbar-expand-md">
     <div class="container d-flex align-items-center">
         <a class="navbar-brand" href="../html/index.html">
+        <a href='https://postimages.org/' target='_blank'><img src='https://i.postimg.cc/JnvD1Gmm/ByteBar.png' border='0' alt='ByteBar'/></a>
             <img src="../../imagenes/ByteBar.png" style="height: 80px" alt="Logo Bytebar">
         </a>
         <button class="navbar-toggler ms-2" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
