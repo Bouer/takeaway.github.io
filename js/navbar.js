@@ -2,8 +2,8 @@ document.getElementById("header-nav").innerHTML=
 `
 <nav class="navbar navbar-expand-md">
     <div class="container d-flex align-items-center">
-        <a class="navbar-brand" href="./html/index.html">
-            <img src="https://i.postimg.cc/JnvD1Gmm/ByteBar.png" style="height: 80px" alt="Logo Bytebar">
+        <a class="navbar-brand" href="../html/index.html">
+            <img src="../../imagenes/ByteBar.png" style="height: 80px" alt="Logo Bytebar">
         </a>
         <button class="navbar-toggler ms-2" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             style="font-size: 25px;" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
