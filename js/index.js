@@ -6,40 +6,55 @@ const app1 = createApp({
       url: 'https://matiasouerd3d.pythonanywhere.com/productos',
       error: false,
       cargando: true,
-      tipo: '',
-      nombre: '',
-      descripcion: '',
+      
+      id:0,
+      tipo: "",
+      nombre: "",
+      descripcion: "",
       precio: 0,
-      imagen: '',
-      usuarioId: 3, // Cambiar por el ID del usuario actual
+      imagen: "",
+      
+      usuarioId: 4, // Cambiar por el ID del usuario actual
+
+      
+      
     };
   },
   methods: {
     fetchData(url) {
       fetch(url)
-        .then(response => response.json())
-        .then(data => {
+      .then(response => response.json())
+      .then(data => {
+
           this.productos = data;
-          this.cargando = false;
-        })
-        .catch(err => {
+          this.cargando=false;
+          this.id = data.id;
+          console.log('Valor de data.id:', this.id);
+      })
+      .catch(err => {
           console.error(err);
-          this.error = true;
-        });
-    },
+          this.error=true              
+      })
+},
     eliminar(id) {
+      
       const url = this.url + '/' + id;
-      console.log('id: ', id);
+      console.log('Valor id:', this.id);
       var options = {
         method: 'DELETE',
-      };
+    }
       fetch(url, options)
         .then(res => res.text()) // or res.json()
         .then(res => {
-          alert('Registro Eliminado');
+      alert('Registro Eliminado')
           location.reload(); // recarga el json luego de eliminado el registro
+        })
+        .catch(error => {
+          
+          alert('Error al eliminar el registro');
         });
     },
+    
     grabar() {
       let producto = {
         tipo: this.tipo,
@@ -57,7 +72,7 @@ const app1 = createApp({
       fetch(this.url, options)
         .then(function () {
           alert('Registro grabado');
-          window.location.href = '../html/index.html'; // recarga productos.html
+          window.location.href = './index.html'; // recarga productos.html
         })
         .catch(err => {
           console.error(err);
@@ -79,9 +94,12 @@ const app1 = createApp({
         .then(response => response.json())
         .then(data => {
           alert(data.message);
+          console.log(data)
+          this.id = data.id
         })
         .catch(error => {
           console.error(error);
+          alert("Error al Grabar")
         });
     },
   },
@@ -176,7 +194,7 @@ const app2 = createApp({
             localStorage.removeItem('username');
             localStorage.removeItem('logOut');
             
-            window.location.href = '../html/index.html';
+            window.location.href = './index.html';
           },
         },
       }).mount('#nav-menu-app');
