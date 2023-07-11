@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ES">
+
+<head>
+  <title>MENU</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+
+    <!-- Vinculando CSS -->
+    <link rel="stylesheet" href="../css/estilo_index.css">
+
+
+</head>
+
+<body>
+  <!--HEADER-->
+  <header id="header-nav">
+  </header>
+
+<!--MAIN-->
+  <main>
+    <div class="container-fluid px-0">
+        <img src="../imagenes/render_2000px.png" class="img-fluid" alt="render">
+    </div>
+    <section id="producto-burger">
+      <!--BURGER-->
+        <div class="container-fluid px-0">
+            <div class="row">
+                <div class="col-12 px-0">
+                    <div class="titulo-menu text-center py-4 px-auto  text-white">
+                        <h1>ARMA TU CARRITO Y DISFRUTA LA AVENTURA!! </h1>
+                    </div>    
+                </div>
+            </div>
+        </div>
+          <!--CARGA DE TARJETAS DESDE BBDD-->
+        <div id="menu-app" class="container-gluid">
+
+          <div v-if="error">
+            <p>Lo sentimos, ha ocurrido un error.</p>
+          </div>
+          <div v-else>
+            <section v-if="cargando">
+              <div class="spinner-border"></div>
+              <p>Cargando...</p>
+            </section>
+            <section v-else>
+              <div class="row">
+                <div class="col-2 container-fluid my-5" v-for="producto in productos">
+                  <div class="card h-100  card-individual">
+                    <img :src="producto.imagen" :alt="producto.nombre" class="card-img-top rounded mx-auto d-block" style="object-fit: cover; max-width: 214px; max-height: 200px;">
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title text-center">{{ producto.nombre }}</h5>
+                      <p class="card-text text-center"> {{ producto.id }}</p>
+                      <p class="card-text text-center"> {{ producto.descripcion }}</p>
+                      <p class="card-text text-center">Precio: $ {{ producto.precio }}</p>
+
+                    <!--Si es ADMIN ve botones de edicion
+                      <div class="d-flex justify-content-center" v-if="tipo_usuario === 'admin'">
+                        <a class="btn btn btn-secondary  me-2" :href="'productoEditar.html?id=' + producto.id">Editar</a>
+                        <button type="button" class="btn btn-info"   @click="showModal = true" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>¿Esta seguro que desea eliminar el producto?</p>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-info " v-on:click="eliminar(producto.id)">Eliminar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>-->
+
+                    <!--Si es un Cliente vemos el boton de carrito-->
+                    <div class="d-flex justify-content-center"  v-if="tipo_usuario !== 'admin'">
+                      <!--AGREGAR AL CARRITO - Button trigger modal -->
+                      <div id="carrito-app">
+                        <button type="button" class="btn btn btn-outline-warning" @click="tipo_usuario !== 'admin' && logOut !== true ? agregarAlCarrito(producto.id) : null; showModal = true" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Agregar al carrito
+                        </button>
+                    </div>
+                      <!-- Modal - sin iniciar sesión -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-if="logOut">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel"></h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Debe iniciar sesión para poder agregar productos a su pedido.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <!--<button type="button" class="btn btn-primary">Iniciar Sesión</button>-->
+                              <a class="btn btn-outline-warning" href="./login.html" role="button">Iniciar Sesión</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Modal - CON iniciar sesión -->
+                      <div v-else>
+                        <div id="pedido-app">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog  modal-xl">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+
+                                <h1>CARRITO DE COMPRA</h1>
+
+                              <div class="modal-footer" id="carrito-app">
+                              <!--<a class="btn btn-primary" href="./index.html" role="button" >-->
+                                <button type="button" class="btn btn-outline-warning" href="../html/index.html" >Continuar Comprando</button>
+
+                                  <i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i>
+
+                                <a class="btn btn-secondary disabled" href="#" role="button">
+                                <span>Borrar Pedido</span>
+                                </a>
+                                <a class="btn btn-outline-danger" href="../html/pedidos.html" role="button" >
+                                <span>Terminar Compra </span>
+                                <i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      </section>
+          </div>
+        </div>
+      </div>
+
+      <!--PIZZAS
+      <div class="con-->
+      <!--ENTRADAS
+      <div class="container-fluid px-0">
+            <div class="row">
+                <div class="col-12 px-0">
+                    <div class="titulo-menu text-center py-4 text-white">
+                        <h1>ENTRADAS</h1>
+                    </div>    
+                </div>
+            </div>
+      </div>-->
+
+      <!--BEBIDA
+      <div class="container-fluid px-0">
+            <div class="row">
+                <div class="col-12 px-0">
+                    <div class="titulo-menu text-center py-4 bg-black text-white">
+                        <h1>BEBIDAS</h1>
+                    </div>    
+                </div>
+            </div>
+      </div>S-->
+      
+    </section>
+  </main>
+  <footer id="footer-byterbar" >
+  </footer>
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+  <!--Link de Bootstrap-->
+      <script src="../js/navbar.js"></script>
+      <script src="../js/footer.js"></script>
+      <!--Link de VUE-->
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!--Siempre Va primero-->
+      <script src="../js/index.js"></script>
+      <script src="../js/pedidos.js"></script>
+      
+
+      
+
+  <!--FONTAWESOME-->
+  <script src="https://kit.fontawesome.com/cba76f59a1.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

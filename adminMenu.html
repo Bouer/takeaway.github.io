@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <title>Menu de ADMIN</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+  <!-- Vinculando CSS -->
+  <link rel="stylesheet" href="../css/menu_admin.css">
+
+
+</head>
+
+<body>
+  <header id="header-nav"></header>
+  <main>
+            <!--MENU ADMIN-->
+            <div class="row">
+              <div class="text-center">
+                  <h3 class="bg-dark text-white p-3">MODO ADMIN</h3>
+              </div>
+              <div>
+                <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                  <li class="nav-item text-center" role="presentation">
+                    <button class="nav-link active  " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Productos</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Usuarios</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link disabled" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Configuracion</button>
+                  </li>
+                </ul>
+                <div class="tab-content " id="myTabsContent">
+                  <div class="tab-pane fade show active my-5 border border-warning border-4 " id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <a class="btn btn-Info disabled py-2 mx-5" href="#">Actualizar Producto</a>
+                    <a class="btn btn-outline-warning py-2 mx-5 my-5" href="./productoAlta.html">Nuevo Producto</a>
+    
+                    <!--CARGA DE TABLA DESDE BBDD de PRODUCTOS-->
+                    <div id="menu-app" class="container-fluid">
+                      <div v-if="error">
+                        <p>Lo sentimos, ha ocurrido un error.</p>
+                      </div>
+                      <div v-else>
+                        <section v-if="cargando">
+                          <div class="spinner-border"></div>
+                          <p>Cargando...</p>
+                        </section>
+                        <section v-else>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Botones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="producto in productos" :key="producto.id">
+                                <td>{{ producto.nombre }}</td>
+                                <td>{{ producto.descripcion }}</td>
+                                <td>{{ producto.precio }}</td>
+                                <td>
+                                  <div class="d-flex justify-content-center">
+                                    <a class="btn btn-outline-warning me-2" :href="'productoEditar.html?id=' + producto.id">Editar</a>
+                                    <button type="button" class="btn btn-outline-danger" @click="showModal = true" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>¿Está seguro que desea eliminar el producto?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-outline-danger" v-on:click="eliminar(producto.id)">Eliminar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
+                    </div>
+                    
+    
+                  </div>
+                  <div class="tab-pane fade my-5 border border-danger border-4" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <a class="btn btn-Info  disabled py-2 mx-5" href="#">Nuevo Usuario</a>
+                    <a class="btn btn-Info disabled py-2 mx-5 my-5 disabled" href="#">Editar Usuario</a>
+                    <a class="btn btn-outline-danger py-2 mx-5 my-5 disabled" href="#">Eliminar Usuario</a>
+                  
+                    <!--CARGA DE TABLA DESDE BBDD de USUARIOS-->
+                    <div id="usuario-app" class="container-fluid">
+                      <div v-if="error">
+                        <p>Lo sentimos, ha ocurrido un error.</p>
+                      </div>
+                      <div v-else>
+                        <section v-if="cargando">
+                          <div class="spinner-border"></div>
+                          <p>Cargando...</p>
+                        </section>
+                        <section v-else>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Direccion</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Botones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="usuario in usuarios" :key="usuario.id">
+                                <td>{{ usuario.tipo }}</td>
+                                <td>{{ usuario.usuario }}</td>
+                                <td>{{ usuario.nombre }}</td>
+                                <td>{{ usuario.direccion }}</td>
+                                <td>{{ usuario.email }}</td>
+                                <td>{{ usuario.telefono }}</td>
+                                
+                                <td>
+                                  <div class="d-flex justify-content-center">
+                                    <a class="btn btn-outline-warning me-2" :href="'usuarioEditar.html?id=' + usuario.id">Editar</a>
+                                    <button type="button" class="btn btn-outline-danger" v-on:click="eliminar(usuario.id)">Eliminar</button>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+        
+      </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 offset-md-5 py-5">
+                <a class="btn btn-danger btn-lg btn-block" href="./index.html">CERRAR MENÚ DE ADMINISTRADOR</a>
+              </div>
+            </div>
+  </main>
+  <footer id="footer-byterbar"> </footer>
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+    <!--Link de Bootstrap-->
+    <script src="../js/navbar.js"></script>
+    <script src="../js/footer.js"></script>
+    <!--Link de VUE-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!--Siempre Va primero-->
+    <script src="../js/index.js"></script>
+    
+    <!--FONTAWESOME-->
+    <script src="https://kit.fontawesome.com/cba76f59a1.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
