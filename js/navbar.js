@@ -3,7 +3,7 @@ document.getElementById("header-nav").innerHTML=
 <nav class="navbar navbar-expand-md">
     <div class="container d-flex align-items-center">
         <a class="navbar-brand" href="../html/index.html">
-            <img src="./imagenes/ByteBar_negro.png" style="height: 80px" alt="Logo Bytebar">
+            <img src="../imagenes/ByteBar_negro.png" style="height: 80px" alt="Logo Bytebar">
         </a>
         <button class="navbar-toggler ms-2" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             style="font-size: 25px;" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,10 +48,10 @@ document.getElementById("header-nav").innerHTML=
                         </div>
                     </li>
                     <li v-else="loggedIn" class="nav-item mr-sm-3 align-items-center">
-                        <a href="./html/login.html" class="mt-2 nav-link btn-borde text-white">Iniciar Sesion</a>
+                        <a href="../html/login.html" class="mt-2 nav-link btn-borde text-white">Iniciar Sesion</a>
                     </li>
                     <li class="nav-item align-items-center my-1">
-                        <a href="./html/pedidos.html" class="nav-link btn-card text-white">
+                        <a href="../html/pedidos.html" class="nav-link btn-card text-white">
                         <i class="fas fa-shopping-cart"></i> 0 - $0,00
                         </a>
                     </li>
