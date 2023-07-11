@@ -95,7 +95,7 @@ const app5 = createApp({
     created() {
       this.fetchData(this.url);
       // Llama a fetchPedidoProductos con el pedidoId adecuado
-      const pedidoId = 1; // Cambiar por el ID del pedido específico que desees obtener
+      const pedidoId = 2; // Cambiar por el ID del pedido específico que desees obtener
       this.fetchPedidoProductos(pedidoId);
     },
   }).mount('#carrito-app');
@@ -166,7 +166,7 @@ const app5 = createApp({
       },
     },
     created() {
-      const pedidoId = 1; // Cambiar por el ID del pedido específico que desees obtener
+      const pedidoId = 2; // Cambiar por el ID del pedido específico que desees obtener
       this.fetchData(`${this.url}/${pedidoId}`);
     },
   }).mount('#datos-app');
