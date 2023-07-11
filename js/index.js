@@ -202,7 +202,7 @@ const app2 = createApp({
 const app4 = createApp({
   data() {
           return {
-            usuarioId: 3, // Cambiar por el ID del usuario actual
+            usuarioId: 4, // Cambiar por el ID del usuario actual
             productos: [],
             pedidos: [], // Nuevo array para almacenar los productos agregados al carrito
             url: 'https://matiasouerd3d.pythonanywhere.com/productos',
