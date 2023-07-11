@@ -1,2 +1,2 @@
-# takeaway.github.io
-TPO2 - Proyecto final de Codo a Codo
+# ByteBar Takeaway
+Pagina web realizada para Codo a Codo como proyecto final
