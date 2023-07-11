@@ -42,7 +42,7 @@ document.getElementById("header-nav").innerHTML=
                                 </li>
                                 <div class="dropdown-divider"></div>
                                 <li>
-                                    <a v-if="userType==='admin'" class="dropdown-item" href="../html/adminMenu.html">ADMIN Menu</a>
+                                    <a v-if="userType==='admin'" class="dropdown-item" href="./html/adminMenu.html">ADMIN Menu</a>
                                 </li>
                             </ul>
                         </div>
