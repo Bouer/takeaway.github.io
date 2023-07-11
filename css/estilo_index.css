@@ -1,0 +1,40 @@
+* {
+    margin: 10;
+    box-sizing: border-box;
+    
+    
+}
+
+:root {
+    /*VARIABLES DE CSS*/
+    --color-primario: #EDB026;
+    --color-secundario: #212529;
+
+
+    --color-texto-invertido: white;
+    --color-texto: black;
+    --navbar-color: rgba(54, 53, 53, 0.6);
+    --seleccion-color: rgba(124, 123, 123, 0.6);
+    --mobile-background-color: #3A4460;
+    --font-size-normal: 20px;
+    --font-size-xl: 20px;
+    --font-size-titulo: 60px;
+}
+
+.titulo-menu {
+    background-color: var(--color-primario);
+    font-family: 'Barlow Condensed', sans-serif;
+}
+#header-nav {
+    background-color: var(--color-secundario);
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-size-normal);
+    font-weight: bold;
+}
+
+.dropmenu {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 21px;
+    font-weight: bolder;
+    ;
+}

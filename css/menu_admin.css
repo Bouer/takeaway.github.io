@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /*VARIABLES DE CSS*/
+    --color-primario: #EDB026;
+    --color-secundario: #212529;
+
+    
+    --color-texto-invertido: white;
+    --color-texto: black;
+    --navbar-color: rgba(54, 53, 53, 0.6);
+    --seleccion-color: rgba(124, 123, 123, 0.6);
+    --mobile-background-color: #3A4460;
+    --font-size-normal: 20px;
+    --font-size-titulo: 60px;
+}
+
+#header-nav {
+    background-color: var(--color-secundario);
+    font-family: 'Barlow Condensed', sans-serif;
+}
+.navbar-nav {
+    display: none;
+}
+
+#footer-byterbar {
+    margin:0;
+}
+
+.header {
+    color: #36A0FF;
+    font-size: 27px;
+    padding: 10px;
+}
+
+.bigicon {
+    font-size: 35px;
+    color: #36A0FF;
+}
